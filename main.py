@@ -5,7 +5,7 @@ database = 'localhost/xe'
 connection = cx_Oracle.connect(username,password, database)
 cursor = connection.cursor()
 
-print('1.Вивести кількість платних додатків по кожній категорії. \n')
+print('1.Р’РёРІРµСЃС‚Рё РєС–Р»СЊРєС–СЃС‚СЊ РїР»Р°С‚РЅРёС… РґРѕРґР°С‚РєС–РІ РїРѕ РєРѕР¶РЅС–Р№ РєР°С‚РµРіРѕСЂС–С—. \n')
 query1 = '''
 SELECT category_name, COUNT(app_name) app_count
 FROM Apps
@@ -19,7 +19,7 @@ for row in cursor:
 
 
 
-print("\n2.Вивести відстоткове відношення додатків по аудиторії людей.\n")
+print("\n2.Р’РёРІРµСЃС‚Рё РІС–РґСЃС‚РѕС‚РєРѕРІРµ РІС–РґРЅРѕС€РµРЅРЅСЏ РґРѕРґР°С‚РєС–РІ РїРѕ Р°СѓРґРёС‚РѕСЂС–С— Р»СЋРґРµР№.\n")
 query2 = """
 SELECT audience_name , round((COUNT(app_name))/ (SELECT COUNT(*) FROM App)*100, 2)  persent                                                                                                             
 FROM Apps
@@ -32,7 +32,7 @@ for row in cursor:
 
 
 
-print("\n3.Вивести динаміку залежності кількості відгуків додатків від їх ціни, які передбачені для всіх груп користувачів. \n")
+print("\n3.Р’РёРІРµСЃС‚Рё РґРёРЅР°РјС–РєСѓ Р·Р°Р»РµР¶РЅРѕСЃС‚С– РєС–Р»СЊРєРѕСЃС‚С– РІС–РґРіСѓРєС–РІ РґРѕРґР°С‚РєС–РІ РІС–Рґ С—С… С†С–РЅРё, СЏРєС– РїРµСЂРµРґР±Р°С‡РµРЅС– РґР»СЏ РІСЃС–С… РіСЂСѓРї РєРѕСЂРёСЃС‚СѓРІР°С‡С–РІ. \n")
 query3 = """
 SELECT price, SUM(reviews) sum_reviews
 FROM Apps
