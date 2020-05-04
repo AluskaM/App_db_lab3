@@ -26,12 +26,12 @@ try:
 
         if category not in category_unique:
                 category_unique.append(category)
-                query = '''INSERT INTO Description(category) VALUES(:category)'''
+                query = '''INSERT INTO Category(category) VALUES(:category)'''
                 cursor.execute(query, category=category)
 
         if audience not in audience_unique:
             audience_unique.append(audience)
-            query = '''INSERT INTO Description(audience) VALUES(:audience)'''
+            query = '''INSERT INTO Audience(audience) VALUES(:audience)'''
             cursor.execute(query, audience=audience)
 
         query = '''
