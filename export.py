@@ -20,7 +20,7 @@ try:
        row = cursor.fetchone()
                  
        csv_writer = csv.writer(csv_file, delimiter=',')
-       csv_writer.writerow(['App_name', 'Category_name', 'Audience_type', 'Reviews', 'Price', 'Data'])
+       csv_writer.writerow(['Category', 'Audience', 'App', 'Reviews'])
         for data in row:
             csv_writer.writerow(data)
 
