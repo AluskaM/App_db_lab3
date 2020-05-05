@@ -1,56 +1,69 @@
 import csv
 import cx_Oracle
-username = 'bd'
-password = 'makarenko'
+username = 'MYONLINEEDU'
+password = 'RV-81-19-14f'
 database = 'localhost/xe'
 connection = cx_Oracle.connect(username,password, database)
 cursor = connection.cursor()
 
-csv_file = open('Google-Playstore-32K.csv', encoding='utf-8', errors='ignore')
+csv_file = open('Google-Playstore-32K.csv', encoding='utf8', errors='ignore')
 reader = csv.reader(csv_file, delimiter=',')
+next(reader, None)
 
 category_unique = []
 audience_unique = []
 
-tables = ['Category', 'Audience', 'App', 'Reviews']
+tables = ['App', 'Category', 'Audience', 'Reviews']
 for table in tables:
     cursor.execute("DELETE FROM " + table)
-i=1
+row_num = 0
 try:
     for row in reader:
         app_name = row[0]
         category_name = row[1]
         reviews_count = row[3]
         price = row[6]
+        new_price = str(price)
         audience_type = row[7]
 
-        if category not in category_unique:
-                category_unique.append(category)
-                query = '''INSERT INTO Category(category) VALUES(:category)'''
-                cursor.execute(query, category=category)
+        if category_name not in category_unique:
+                category_unique.append(category_name)
+                query = '''INSERT INTO Category(category_name) VALUES(:category_name)'''
+                cursor.execute(query, category_name=category_name)
 
-        if audience not in audience_unique:
-            audience_unique.append(audience)
-            query = '''INSERT INTO Audience(audience) VALUES(:audience)'''
-            cursor.execute(query, audience=audience)
-
-        query = '''
-               INSERT INTO App(app_name, category_name, audience_type, price) 
-                   VALUES(:app_name, :category_name, :audience_type, :price)'''
-        cursor.execute(query, app_name=app_name, category_name=category_name, audience_type=audience_type, price=price)
-
+        if audience_type not in audience_unique:
+            audience_unique.append(audience_type)
+            query = '''INSERT INTO Audience(audience_type) VALUES(:audience_type)'''
+            cursor.execute(query, audience_type=audience_type)
+    
+        if reviews_count == '':
+            reviews_count = 0
         query = '''
                      INSERT INTO Reviews(reviews_count, app_name, review_date) 
                          VALUES(:reviews_count, :app_name, :review_date)'''
         cursor.execute(query, reviews_count=reviews_count, app_name=app_name, review_date='05.05.2017')
 
-    i+=1
+        if new_price[0] == '$':
+            f_price = float(new_price[1:])
+        else:
+            f_price = 0
+        query = '''
+               INSERT INTO App(app_name, category_name, audience_type, price) 
+                   VALUES(:app_name, :category_name, :audience_type, :price)'''
+        cursor.execute(query, app_name=app_name, category_name=category_name, audience_type=audience_type, price=f_price)
+        row_num += 1
+        if row_num == 50:
+            break
 
+except:
+    print('Error')
+    raise
 
-connection.commit()
-cursor.close()
-connection.close()
-csv_file.close()
+finally:
+    connection.commit()
+    cursor.close()
+    connection.close()
+    csv_file.close()
 
 
 
