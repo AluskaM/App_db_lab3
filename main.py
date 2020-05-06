@@ -47,10 +47,10 @@ print("\n2. Вивести відстоткове відношення дода�
 audience=[]
 apps=[]
 query2 = """
-SELECT audience_name , round((COUNT(app_name))/ (SELECT COUNT(*) FROM App)*100, 2)  persent                                                                                                             
+SELECT audience_type , round((COUNT(app_name))/ (SELECT COUNT(*) FROM App)*100, 2)  persent                                                                                                             
 FROM Apps
-GROUP BY audience_name
-ORDER BY persent DESC, audience_name
+GROUP BY audience_type
+ORDER BY persent DESC, audience_type
 """
 cursor.execute(query2)
 for row in cursor.fetchall():
@@ -68,7 +68,7 @@ price=[]
 query3 = """
 SELECT price, SUM(reviews) sum_reviews
 FROM Apps
-WHERE audience_name='Everyone'
+WHERE audience_type='Everyone'
 GROUP BY price
 ORDER BY price
 """
