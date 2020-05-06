@@ -63,7 +63,7 @@ pie = py.plot([pie],auto_open = True, file_name = "Plot2",)
 
 
 print("\nВивести динаміку залежності кількості відгуків додатків від їх ціни, які передбачені для всіх груп користувачів. \n")
-reviews=[]
+reviews_count=[]
 price=[]
 query3 = """
 SELECT price, SUM(reviews_count) sum_reviews
@@ -75,9 +75,9 @@ ORDER BY price
 cursor.execute(query3)
 
 for row in cursor.fetchall():
-    reviews.append (row[0])
+    reviews_count.append (row[0])
     price.append(row[1])
-scatter = go.Scatter (x = reviews, y = price)
+scatter = go.Scatter (x = reviews_count, y = price)
 scatter = py.plot([scatter],auto_open = True, file_name = "Plot3")
 
 
