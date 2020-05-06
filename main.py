@@ -63,9 +63,32 @@ pie = py.plot([pie],auto_open = True, file_name = "Plot2",)
 
 
 
+
+print("\nВивести динаміку залежності кількості відгуків додатків від їх ціни, які передбачені для всіх груп користувачів. \n")
+reviews=[]
+price=[]
+query3 = """
+SELECT price, SUM(reviews_count) sum_reviews
+FROM Apps
+WHERE audience_type='Everyone'
+GROUP BY price
+ORDER BY price
+"""
+cursor.execute(query3)
+
+for row in cursor.fetchall():
+    reviews_count.append (row[0])
+    price.append(row[1])
+scatter = go.Scatter (x = reviews_count, y = price)
+scatter = py.plot([scatter],auto_open = True, file_name = "Plot3")
+
+
+
 my_dboard = dash.Dashboard()
 bar_id = fileId_from_url(bar)
 pie_id =fileId_from_url(pie)
+scatter_id = fileId_from_url(scatter)
+
 
 box_1= {
     'type': 'box',
@@ -80,6 +103,18 @@ box_2 = {
     'fileId': pie_id,
     'title': 'Вивести відстоткове відношення додатків по аудиторії людей.'
 }
+
+box_3 = {
+    'type': 'box',
+    'boxType': 'plot',
+    'fileId': scatter_id,
+    'title': 'Вивести динаміку залежності кількості відгуків додатків від їх ціни, які передбачені для всіх груп користувачів.'
+}
+
+
+my_dboard.insert(box_1)
+my_dboard.insert(box_2, 'below', 1)
+my_dboard.insert(box_3, 'left', 2)
 
 
 py.dashboard_ops.upload(my_dboard, 'db_alla_lab3')
