@@ -51,7 +51,7 @@ try:
         query = '''
                INSERT INTO App(app_name, category_name, audience_type, price) 
                    VALUES(:app_name, :category_name, :audience_type, :price)'''
-        cursor.execute(query, app_name=app_name, category_name=category_name, audience_type=audience_type, price=f_price)
+        cursor.execute(query,id=id, app_name=app_name, category_name=category_name, audience_type=audience_type, price=f_price)
         row_num += 1
         i+=1
         if row_num == 50:
