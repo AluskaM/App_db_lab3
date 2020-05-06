@@ -59,7 +59,7 @@ i+=1
     
 
 except:
-    print('Error')
+    print('Error',i)
     raise
 
 finally:
