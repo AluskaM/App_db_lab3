@@ -43,8 +43,8 @@ try:
             reviews_count = 0
         query = '''
                      INSERT INTO Reviews(id,reviews_count, app_name, review_date) 
-                         VALUES(:id, :reviews_count, :app_name, :review_date)'''
-        cursor.execute(query,id=i, reviews_count=reviews_count, app_name=app_name, review_date='05.05.2017')
+                         VALUES(:id, :reviews_count, :app_name)'''
+        cursor.execute(query,id=i, reviews_count=reviews_count, app_name=app_name)
 
         if new_price[0] == '$':
             f_price = float(new_price[1:])
