@@ -17,6 +17,7 @@ tables = ['App', 'Category', 'Audience', 'Reviews']
 for table in tables:
     cursor.execute("DELETE FROM " + table)
 row_num = 0
+i=1
 try:
     for row in reader:
         app_name = row[0]
@@ -52,6 +53,7 @@ try:
                    VALUES(:app_name, :category_name, :audience_type, :price)'''
         cursor.execute(query, app_name=app_name, category_name=category_name, audience_type=audience_type, price=f_price)
         row_num += 1
+        i+=1
         if row_num == 50:
             break
 
