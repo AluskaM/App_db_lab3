@@ -66,7 +66,7 @@ print("\nВивести динаміку залежності кількості
 reviews=[]
 price=[]
 query3 = """
-SELECT price, SUM(reviews) sum_reviews
+SELECT price, SUM(reviews_count) sum_reviews
 FROM Apps
 WHERE audience_type='Everyone'
 GROUP BY price
