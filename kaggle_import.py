@@ -42,7 +42,7 @@ try:
         if reviews_count == '':
             reviews_count = 0
         query = '''
-                     INSERT INTO Reviews(id,reviews_count, app_name, review_date) 
+                     INSERT INTO Reviews(id,reviews_count, app_name) 
                          VALUES(:id, :reviews_count, :app_name)'''
         cursor.execute(query,id=i, reviews_count=reviews_count, app_name=app_name)
 
