@@ -40,18 +40,18 @@ try:
         if reviews_count == '':
             reviews_count = 0
         query = '''
-                     INSERT INTO Reviews(reviews_count, app_name, review_date) 
-                         VALUES(:reviews_count, :app_name, :review_date)'''
-        cursor.execute(query, reviews_count=reviews_count, app_name=app_name, review_date='05.05.2017')
+                     INSERT INTO Reviews(id,reviews_count, app_name, review_date) 
+                         VALUES(:id, :reviews_count, :app_name, :review_date)'''
+        cursor.execute(query,id=i, reviews_count=reviews_count, app_name=app_name, review_date='05.05.2017')
 
         if new_price[0] == '$':
             f_price = float(new_price[1:])
         else:
             f_price = 0
         query = '''
-               INSERT INTO App(app_name, category_name, audience_type, price) 
-                   VALUES(:app_name, :category_name, :audience_type, :price)'''
-        cursor.execute(query,id=id, app_name=app_name, category_name=category_name, audience_type=audience_type, price=f_price)
+               INSERT INTO App(id, app_name, category_name, audience_type, price) 
+                   VALUES(:id, :app_name, :category_name, :audience_type, :price)'''
+        cursor.execute(query,id=i, app_name=app_name, category_name=category_name, audience_type=audience_type, price=f_price)
         row_num += 1
         i+=1
         if row_num == 50:
