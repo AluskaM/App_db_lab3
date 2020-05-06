@@ -25,8 +25,6 @@ ALTER TABLE Reviews
     
     
 ALTER TABLE App
-    ADD CONSTRAINT app_name_fk FOREIGN KEY(app_name) REFERENCES Reviews(app_name);
-ALTER TABLE App
     ADD CONSTRAINT category_name_fk FOREIGN KEY(category_name) REFERENCES Category(category_name);
 ALTER TABLE App
     ADD CONSTRAINT audience_type_fk FOREIGN KEY(audience_type) REFERENCES Audience(audience_type);
