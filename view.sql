@@ -6,4 +6,4 @@ price,
 reviews_count,
 review_date
 FROM App JOIN Reviews 
-ON App.app_name=Reviews.app_name;
+ON App.id=Reviews.id;
