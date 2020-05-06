@@ -1,3 +1,4 @@
+
 import csv
 import cx_Oracle
 username = 'bd'
@@ -9,6 +10,7 @@ cursor = connection.cursor()
 csv_file = open('Google-Playstore-32K.csv', encoding='utf8', errors='ignore')
 reader = csv.reader(csv_file, delimiter=',')
 next(reader, None)
+
 
 category_unique = []
 audience_unique = []
@@ -48,14 +50,13 @@ try:
             f_price = float(new_price[1:])
         else:
             f_price = 0
-        query = '''
-               INSERT INTO App(id, app_name, category_name, audience_type, price) 
+                        
+                query = ''' INSERT INTO App(id, app_name, category_name, audience_type, price) 
                    VALUES(:id, :app_name, :category_name, :audience_type, :price)'''
         cursor.execute(query,id=i, app_name=app_name, category_name=category_name, audience_type=audience_type, price=f_price)
         row_num += 1
         i+=1
-        if row_num == 50:
-            break
+    
 
 except:
     print('Error')
@@ -66,20 +67,4 @@ finally:
     cursor.close()
     connection.close()
     csv_file.close()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
