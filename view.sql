@@ -1,5 +1,5 @@
 CREATE OR REPLACE VIEW Apps AS
-SELECT app_name, 
+SELECT App.app_name, 
 category_name,
 audience_type,
 price,
