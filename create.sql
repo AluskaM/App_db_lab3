@@ -14,8 +14,7 @@ CREATE TABLE App(
     category_name VARCHAR2(20) NOT NULL,
     audience_type VARCHAR2(20) NOT NULL,
     price NUMBER NOT NULL);
-ALTER TABLE App
-    ADD CONSTRAINT id_pk PRIMARY KEY(id); 
+ 
 
 CREATE TABLE Reviews(
     id integer NOT NULL,
