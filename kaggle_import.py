@@ -47,13 +47,13 @@ try:
         cursor.execute(query,id=i, reviews_count=reviews_count, app_name=app_name)
 
         if new_price[0] == '$':
-            f_price = float(new_price[1:])
+            pricee = float(new_price[1:])
         else:
-            f_price = 0
+            pricee = 0
                         
                 query = ''' INSERT INTO App(id, app_name, category_name, audience_type, price) 
                    VALUES(:id, :app_name, :category_name, :audience_type, :price)'''
-        cursor.execute(query,id=i, app_name=app_name, category_name=category_name, audience_type=audience_type, price=f_price)
+        cursor.execute(query,id=i, app_name=app_name, category_name=category_name, audience_type=audience_type, price=pricee)
         row_num += 1
 i+=1
     
