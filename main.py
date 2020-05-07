@@ -77,9 +77,9 @@ ORDER BY price
 cursor.execute(query3)
 
 for row in cursor.fetchall():
-    reviews_count.append (row[0])
+    reviews.append (row[0])
     price.append(row[1])
-scatter = go.Scatter (x = reviews_count, y = price)
+scatter = go.Scatter (x = reviews, y = price)
 scatter = py.plot([scatter],auto_open = True, file_name = "Plot3")
 
 
