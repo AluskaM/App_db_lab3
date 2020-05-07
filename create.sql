@@ -14,6 +14,8 @@ CREATE TABLE App(
     category_name VARCHAR2(20) NOT NULL,
     audience_type VARCHAR2(20) NOT NULL,
     price NUMBER NOT NULL);
+    ALTER TABLE App
+    ADD CONSTRAINT id_pk PRIMARY KEY(id);   
  
 
 CREATE TABLE Reviews(
@@ -21,8 +23,12 @@ CREATE TABLE Reviews(
     review_date date,
     app_name VARCHAR2(50) NOT NULL,
     reviews_count INT NOT NULL);
+    ALTER TABLE App
+    ADD CONSTRAINT idd_pk PRIMARY KEY(id);   
 
 
+ALTER TABLE App
+    ADD CONSTRAINT id_fk FOREIGN KEY(id) REFERENCES App(id);
 ALTER TABLE App
     ADD CONSTRAINT category_name_fk FOREIGN KEY(category_name) REFERENCES Category(category_name);
 ALTER TABLE App
