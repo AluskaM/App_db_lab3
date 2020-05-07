@@ -22,9 +22,7 @@ CREATE TABLE Reviews(
     app_name VARCHAR2(50) NOT NULL,
     reviews_count INT NOT NULL);
 
-    
-ALTER TABLE App
-    ADD CONSTRAINT id_fk FOREIGN KEY(id) REFERENCES App(id); 
+
 ALTER TABLE App
     ADD CONSTRAINT category_name_fk FOREIGN KEY(category_name) REFERENCES Category(category_name);
 ALTER TABLE App
