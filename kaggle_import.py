@@ -11,7 +11,6 @@ csv_file = open('Google-Playstore-32K.csv', encoding='utf8', errors='ignore')
 reader = csv.reader(csv_file, delimiter=',')
 next(reader, None)
 
-
 category_unique = []
 audience_unique = []
 
@@ -42,21 +41,20 @@ try:
         if reviews_count == '':
             reviews_count = 0
         query = '''
-                     INSERT INTO Reviews(id,reviews_count, app_name) 
-                         VALUES(:id, :reviews_count, :app_name)'''
-        cursor.execute(query,id=i, reviews_count=reviews_count, app_name=app_name)
+                     INSERT INTO Reviews(id, reviews_count, app_name, review_date) 
+                         VALUES(:id, :reviews_count, :app_name, :review_date)'''
+        cursor.execute(query, id=i, reviews_count=reviews_count, app_name=app_name, review_date='05.05.2017')
 
         if new_price[0] == '$':
             f_price = float(new_price[1:])
         else:
             f_price = 0
-                        
-                query = ''' INSERT INTO App(id, app_name, category_name, audience_type, price) 
+        query = '''
+               INSERT INTO App(id, app_name, category_name, audience_type, price) 
                    VALUES(:id, :app_name, :category_name, :audience_type, :price)'''
-        cursor.execute(query,id=i, app_name=app_name, category_name=category_name, audience_type=audience_type, price=f_price)
+        cursor.execute(query, id=i, app_name=app_name, category_name=category_name, audience_type=audience_type, price=f_price)
         row_num += 1
         i+=1
-    
 
 except:
     print('Error',i)
@@ -67,4 +65,3 @@ finally:
     cursor.close()
     connection.close()
     csv_file.close()
-
