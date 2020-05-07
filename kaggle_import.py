@@ -43,7 +43,7 @@ try:
         query = '''
                      INSERT INTO Reviews(id, reviews_count, app_name, review_date) 
                          VALUES(:id, :reviews_count, :app_name, :review_date)'''
-        app_name.encode('utf-8', 'replace').decode('utf-8', 'ignore')
+       app_name = app_name.encode('utf-8', 'replace').decode('utf-8', 'ignore')
         cursor.execute(query, id=i, reviews_count=reviews_count, app_name=app_name, review_date='05.05.2017')
 
         if new_price[0] == '$':
