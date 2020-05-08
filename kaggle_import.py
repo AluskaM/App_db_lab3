@@ -7,14 +7,15 @@ database = 'localhost:1521/xe'
 connection = cx_Oracle.connect(username, password, database)
 cursor = connection.cursor()
 
-csv_file = open('Google-Playstore-32K.csv', encoding='utf8', errors='ignore')
+
+csv_file = open('Google-Playstore-32K.csv', encoding='ascii', errors='ignore')
 reader = csv.reader(csv_file, delimiter=',')
 next(reader, None)
 
 category_unique = []
 audience_unique = []
 
-tables = ['App', 'Category1', 'Audience', 'Reviews']
+tables = ['App', 'Category', 'Audience', 'Reviews']
 for table in tables:
     cursor.execute("DELETE FROM " + table)
 row_num = 0
@@ -30,7 +31,7 @@ try:
 
         if category_name not in category_unique:
             category_unique.append(category_name)
-            query = '''INSERT INTO Category1(category_name) VALUES(:category_name)'''
+            query = '''INSERT INTO Category(category_name) VALUES(:category_name)'''
             cursor.execute(query, category_name=category_name)
 
         if audience_type not in audience_unique:
@@ -38,17 +39,16 @@ try:
             query = '''INSERT INTO Audience(audience_type) VALUES(:audience_type)'''
             cursor.execute(query, audience_type=audience_type)
 
-         for elem in app_name:
-            if elem == '�':
-                i+=1
+        for a in app_name:
+            if a == '�':
                 continue
-            
+
         if reviews_count == '':
             reviews_count = 0
         query = '''
                      INSERT INTO Reviews(id, reviews_count, app_name) 
                          VALUES(:id, :reviews_count, :app_name)'''
-  
+
         cursor.execute(query, id=i, reviews_count=reviews_count, app_name=app_name)
 
         if new_price[0] == '$':
@@ -58,12 +58,12 @@ try:
         query = '''
                INSERT INTO App(id, app_name, category_name, audience_type, price) 
                    VALUES(:id, :app_name, :category_name, :audience_type, :price)'''
-     
+
         cursor.execute(query, id=i, app_name=app_name, category_name=category_name, audience_type=audience_type,
                        price=f_price)
         row_num += 1
         i += 1
-       
+
 
 except:
     print('Error', i)
