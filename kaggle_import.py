@@ -20,7 +20,7 @@ for table in tables:
 row_num = 0
 i=1
 try:
-    if row_num==13506 or 6943 or 23459:
+    if row_num==13505 or 6942 or 23458:
          continue    
     for row in reader:
         app_name = row[0]
