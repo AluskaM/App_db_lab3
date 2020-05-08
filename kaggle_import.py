@@ -19,7 +19,7 @@ for table in tables:
 row_num = 0
 i=1
 try:
-    for row in reader:
+  
         app_name = row[0]
         category_name = row[1]
         reviews_count = row[3]
@@ -56,12 +56,7 @@ try:
         cursor.execute(query, id=i, app_name=app_name, category_name=category_name, audience_type=audience_type, price=f_price)
         row_num += 1
         i+=1
-        if row_num == 50:
-           break
-
-except:
-    print('Error',i)
-    raise
+  
 
 finally:
     connection.commit()
