@@ -23,7 +23,7 @@ CREATE TABLE Reviews(
     review_date date,
     app_name VARCHAR2(50) NOT NULL,
     reviews_count INT NOT NULL);
-    ALTER TABLE App
+    ALTER TABLE Reviews
     ADD CONSTRAINT idd_pk PRIMARY KEY(id);   
 
 
