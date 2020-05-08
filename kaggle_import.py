@@ -38,10 +38,10 @@ try:
             query = '''INSERT INTO Audience(audience_type) VALUES(:audience_type)'''
             cursor.execute(query, audience_type=audience_type)
 
-         for a in app_name:
-            if a == '�':
+         for elem in app_name:
+            if elem == '�':
+                i+=1
                 continue
-           
             
         if reviews_count == '':
             reviews_count = 0
