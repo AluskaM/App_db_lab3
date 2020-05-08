@@ -20,6 +20,8 @@ for table in tables:
 row_num = 0
 i=1
 try:
+    if row_num==13506 or 6943 or 23459:
+         continue    
     for row in reader:
         app_name = row[0]
         category_name = row[1]
