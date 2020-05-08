@@ -42,7 +42,7 @@ try:
         query = '''
                      INSERT INTO Reviews(id, reviews_count, app_name) 
                          VALUES(:id, :reviews_count, :app_name)'''
-       app_name = app_name.encode('utf-8', 'replace').decode('utf-8', 'ignore')
+     
         cursor.execute(query, id=i, reviews_count=reviews_count, app_name=app_name)
 
         if new_price[0] == '$':
@@ -56,6 +56,8 @@ try:
         cursor.execute(query, id=i, app_name=app_name, category_name=category_name, audience_type=audience_type, price=f_price)
         row_num += 1
         i+=1
+        if row_num == 50:
+           break
 
 except:
     print('Error',i)
