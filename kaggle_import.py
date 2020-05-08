@@ -11,8 +11,10 @@ csv_file = open('Google-Playstore-32K.csv', encoding='utf8', errors='ignore')
 reader = csv.reader(csv_file, delimiter=',')
 next(reader, None)
 
+app_name_unique = []
 category_unique = []
 audience_unique = []
+
 
 tables = ['App', 'Category', 'Audience', 'Reviews']
 for table in tables:
@@ -27,7 +29,16 @@ try:
         price = row[6]
         new_price = str(price)
         audience_type = row[7]
-
+        
+        
+        if app_name not in app_name_unique:
+            app_name_unique.append(app_name)
+            query = '''
+               INSERT INTO App(id, app_name, category_name, audience_type, price) 
+                   VALUES(:id, :app_name, :category_name, :audience_type, :price)'''
+        app_name.encode('utf-8', 'replace').decode('utf-8', 'ignore')
+        cursor.execute(query, id=i, app_name=app_name, category_name=category_name, audience_type=audience_type, price=f_price)
+        
         if category_name not in category_unique:
                 category_unique.append(category_name)
                 query = '''INSERT INTO Category(category_name) VALUES(:category_name)'''
@@ -50,11 +61,7 @@ try:
             f_price = float(new_price[1:])
         else:
             f_price = 0
-        query = '''
-               INSERT INTO App(id, app_name, category_name, audience_type, price) 
-                   VALUES(:id, :app_name, :category_name, :audience_type, :price)'''
-        app_name.encode('utf-8', 'replace').decode('utf-8', 'ignore')
-        cursor.execute(query, id=i, app_name=app_name, category_name=category_name, audience_type=audience_type, price=f_price)
+       
         row_num += 1
         i+=1
 
