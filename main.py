@@ -26,7 +26,7 @@ category=[]
 count=[]
 query1 = '''
 SELECT category_name, COUNT(app_name) app_count
-FROM Apps
+FROM App
 WHERE price!=0
 GROUP BY category_name
 ORDER BY  app_count,category_name
@@ -48,7 +48,7 @@ audience=[]
 apps=[]
 query2 = """
 SELECT audience_type , round((COUNT(app_name))/ (SELECT COUNT(*) FROM App)*100, 2)  persent                                                                                                             
-FROM Apps
+FROM App
 GROUP BY audience_type
 ORDER BY persent DESC, audience_type
 """
@@ -69,7 +69,7 @@ reviews=[]
 price=[]
 query3 = """
 SELECT price, SUM(reviews_count) sum_reviews
-FROM Apps
+FROM App
 WHERE audience_type='Everyone'
 GROUP BY price
 ORDER BY price
