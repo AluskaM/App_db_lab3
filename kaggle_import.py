@@ -9,12 +9,9 @@ cursor = connection.cursor()
 
 csv_file = open('Google-Playstore-32K.csv', encoding='utf8', errors='ignore')
 reader = csv.reader(csv_file, delimiter=',')
-next(reader, None)
-
 
 category_unique = []
 audience_unique = []
-
 
 tables = ['App', 'Category', 'Audience', 'Reviews']
 for table in tables:
@@ -59,11 +56,8 @@ for row in reader:
     app_name.encode('utf-8', 'replace').decode('utf-8', 'ignore')
     cursor.execute(query, id=i, app_name=app_name, category_name=category_name, audience_type=audience_type, price=f_price)
 
-
     row_num += 1
     i+=1
-
-
 
     connection.commit()
     cursor.close()
