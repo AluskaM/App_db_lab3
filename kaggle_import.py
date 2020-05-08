@@ -38,12 +38,17 @@ try:
             query = '''INSERT INTO Audience(audience_type) VALUES(:audience_type)'''
             cursor.execute(query, audience_type=audience_type)
 
+         for a in app_name:
+            if a == '�':
+                continue
+           
+            
         if reviews_count == '':
             reviews_count = 0
         query = '''
                      INSERT INTO Reviews(id, reviews_count, app_name) 
                          VALUES(:id, :reviews_count, :app_name)'''
-        app_name=app_name.encode('utf-8', 'replace').decode('utf-8', 'ignore')
+  
         cursor.execute(query, id=i, reviews_count=reviews_count, app_name=app_name)
 
         if new_price[0] == '$':
@@ -53,7 +58,7 @@ try:
         query = '''
                INSERT INTO App(id, app_name, category_name, audience_type, price) 
                    VALUES(:id, :app_name, :category_name, :audience_type, :price)'''
-        app_name=app_name.encode('utf-8', 'replace').decode('utf-8', 'ignore')
+     
         cursor.execute(query, id=i, app_name=app_name, category_name=category_name, audience_type=audience_type,
                        price=f_price)
         row_num += 1
