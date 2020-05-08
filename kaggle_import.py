@@ -30,7 +30,10 @@ try:
         new_price = str(price)
         audience_type = row[7]
         
-        
+          if new_price[0] == '$':
+            f_price = float(new_price[1:])
+        else:
+            f_price = 0
         if app_name not in app_name_unique:
             app_name_unique.append(app_name)
             query = '''
@@ -57,10 +60,7 @@ try:
        app_name = app_name.encode('utf-8', 'replace').decode('utf-8', 'ignore')
         cursor.execute(query, id=i, reviews_count=reviews_count, app_name=app_name)
 
-        if new_price[0] == '$':
-            f_price = float(new_price[1:])
-        else:
-            f_price = 0
+      
        
         row_num += 1
         i+=1
