@@ -20,8 +20,6 @@ for table in tables:
 row_num = 0
 i=1
 try:
-    if row_num==13505 or row_num==6942 or row_num==23458:
-         continue    
     for row in reader:
         app_name = row[0]
         category_name = row[1]
@@ -46,7 +44,7 @@ try:
                      INSERT INTO Reviews(id, reviews_count, app_name, review_date) 
                          VALUES(:id, :reviews_count, :app_name, :review_date)'''
        app_name = app_name.encode('utf-8', 'replace').decode('utf-8', 'ignore')
-        cursor.execute(query, id=i, reviews_count=reviews_count, app_name=app_name, review_date='05.05.2017')
+        cursor.execute(query, id=i, reviews_count=reviews_count, app_name=app_name)
 
         if new_price[0] == '$':
             f_price = float(new_price[1:])
