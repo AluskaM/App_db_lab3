@@ -20,7 +20,6 @@ CREATE TABLE App(
 
 CREATE TABLE Reviews(
     id integer NOT NULL,
-    review_date date,
     app_name VARCHAR2(50) NOT NULL,
     reviews_count INT NOT NULL);
     ALTER TABLE Reviews
