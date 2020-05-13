@@ -22,7 +22,6 @@ CREATE TABLE Reviews(
     id integer NOT NULL,
     app_name VARCHAR2(50) NOT NULL,
     reviews_count INT NOT NULL);
-    review_date date;
     ALTER TABLE Reviews
     ADD CONSTRAINT idd_pk PRIMARY KEY(id);   
 
@@ -33,6 +32,4 @@ ALTER TABLE App
     ADD CONSTRAINT category_name_fk FOREIGN KEY(category_name) REFERENCES Category(category_name);
 ALTER TABLE App
     ADD CONSTRAINT audience_type_fk FOREIGN KEY(audience_type) REFERENCES Audience(audience_type);
-    
-    
     
