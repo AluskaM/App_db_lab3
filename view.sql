@@ -3,7 +3,6 @@ SELECT App.app_name,
 category_name,
 audience_type,
 price,
-reviews_count,
-review_date
+reviews_count
 FROM App JOIN Reviews 
 ON App.app_name=Reviews.app_name;
